@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech For Girls Registration</title>
+  <link rel="stylesheet" href="../WholeProject/styles.css">
+  <script src="../WholeProject/script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>🚀 Tech For Girls Registration</h2>
+
+    <form id="registrationForm">
+      <label>Name:</label>
+      <input type="text" id="name" required />
+
+      <label>Phone Number:</label>
+      <input type="number" id="phone" required />
+
+      <label>Email ID:</label>
+      <input type="email" id="email" required />
+
+      <label>College/Department:</label>
+      <input type="text" id="college" required />
+
+      <label>Upload Screenshot / Resume:</label>
+      <input type="file" id="screenshot" accept="image/*,application/pdf" required />
+
+        <div class="share-section">
+            <!-- <button type="button" id="shareBtn">Share on WhatsApp</button>
+            <p id="counterText">Click count: 0 / 5</p> -->
+            <div id="counter">Click count: 0/5</div> 
+        <button id="shareBtn">Share on WhatsApp</button> 
+            <div id="message"></div> 
+            <button type="submit" id="submitBtn">Submit Registration</button>
+        </div>
+
+    </form>
+
+    <p id="message"></p>
+  </div>
+  <script> 
+        const MAX_CLICKS = 5;
+        const shareBtn = document.getElementById("shareBtn");
+        const counterDisplay = document.getElementById("counter");
+        const messageDisplay = document.getElementById("message"); 
+        //Load counter from localStorage or initialize to 0 
+        let clickCount = parseInt(localStorage.getItem("whatsappClickCount")) || 0; 
+        function updateUI() { counterDisplay.textContent = `Click count: ${clickCount}/${MAX_CLICKS}`; 
+            if (clickCount >= MAX_CLICKS) { shareBtn.disabled = true; 
+                messageDisplay.textContent = "✅ Sharing complete. Please continue."; } } updateUI(); 
+                // Initial UI update on page load 
+                shareBtn.addEventListener("click", () => { if (clickCount >= MAX_CLICKS) return; 
+                    // Pre-written message 
+                    const message = "Hey Buddy, Join Tech For Girls Community"; 
+                    const whatsappURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappURL, "_blank"); 
+                    // Increment click count 
+                    clickCount++; localStorage.setItem("whatsappClickCount", clickCount); updateUI(); }); 
+    </script> 
+</body>
+</html>
